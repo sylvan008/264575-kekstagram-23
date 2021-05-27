@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Олег Селин](https://up.htmlacademy.ru/javascript/23/user/264575).
-* Наставник: `Неизвестно`.
+* Наставник: [Elizaveta Kryazhkova](https://github.com/ElKry).
 
 ---
 
