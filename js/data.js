@@ -59,7 +59,7 @@ function createStubPublishedPhoto(countPhoto=16, countComment=3, stubCommentsFn=
     .fill({})
     .map((init, index) => ({
       id: index,
-      url: `photos/${index}.jpg`,
+      url: `photos/${index + 1}.jpg`,
       description: photoDescriptions[index],
       likes: randomRange(15, 200),
       comments: stubCommentsFn(countComment, index),

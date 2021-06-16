@@ -1,3 +1,5 @@
 import {createStubPublishedPhoto} from './data.js';
+import {viewImagesThumbnails} from './view-images-thumbnails.js';
 
-createStubPublishedPhoto(25, 3);
+const userPhotos = createStubPublishedPhoto(25, 3);
+viewImagesThumbnails(userPhotos);
