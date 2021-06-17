@@ -1,4 +1,9 @@
 /**
+ * @desc Функция заглушка
+ */
+function noop() {}
+
+/**
  * @desc Проверяет, что строка не превосходит максимально установленную длину строки.
  * @param {string} string
  * @param {number} maxLength
@@ -30,6 +35,7 @@ function getLastArrayIndex(array) {
 }
 
 export {
+  noop,
   checkStringLength,
   randomRange,
   getLastArrayIndex
