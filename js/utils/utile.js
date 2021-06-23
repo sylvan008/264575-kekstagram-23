@@ -34,9 +34,20 @@ function getLastArrayIndex(array) {
   return array.length - 1;
 }
 
+/**
+ *
+ * @param {Event} evt
+ * @return boolean
+ */
+function isEscEvent(evt) {
+  const key = evt.key.toLowerCase();
+  return key === 'escape' || key === 'esc';
+}
+
 export {
   noop,
   checkStringLength,
   randomRange,
-  getLastArrayIndex
+  getLastArrayIndex,
+  isEscEvent
 };
