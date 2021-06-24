@@ -24,8 +24,8 @@ function doValidationHashTag(value) {
   } else if (checkDuplicateHashTags(hashTags)) {
     hashTagInput.setCustomValidity('Хештеги не должны повторяться');
   } else if (!checkHashTagsByRegularExpression(hashTags)) {
-    hashTagInput.setCustomValidity(`Хештег должен начинаться с "#" и состоять только из букв и цифр.
-    Хештеги разделяются пробелами.`);
+    hashTagInput.setCustomValidity(`Хештег должен начинаться с "#" и состоять только из букв и цифр,
+    не превышать 20 символов. Хештеги разделяются пробелами.`);
   } else {
     hashTagInput.setCustomValidity('');
   }
