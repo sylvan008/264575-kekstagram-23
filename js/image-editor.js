@@ -130,44 +130,48 @@ function onSliderHandler(_, handle, unencoded) {
   setPreviewFilter(filter, effectValueElement.value, unit);
 }
 
-function initSlider(options={}) {
-  const startValue = options.start;
-  noUiSlider.create(sliderElement, {...SliderDefaultOptions, ...options});
-  effectValueElement.value = startValue;
-
-  sliderElement.noUiSlider.on('update', onSliderHandler);
+function prepareSlider(options={}) {
+  if (!sliderElement.noUiSlider) {
+    noUiSlider.create(sliderElement, {...SliderDefaultOptions, ...options});
+    sliderElement.noUiSlider.on('update', onSliderHandler);
+  } else {
+    sliderElement.noUiSlider.updateOptions(options);
+  }
+  effectValueElement.value = options.start;
 }
 
-function destroySlider(slider) {
-  if (slider.noUiSlider) {
-    slider.noUiSlider.destroy();
+function destroySlider() {
+  if (sliderElement.noUiSlider) {
+    sliderElement.noUiSlider.destroy();
     effectValueElement.value = '';
     delete imagePreviewStyles['filter'];
     updatePreviewImageStyles(imagePreviewStyles);
   }
 }
 
-function initImageEditor() {
-  resetImageEditor();
-}
-
-smallerButton.addEventListener('click', () => {
-  setScale(calcScale(-SCALE_STEP));
-});
-
-biggerButton.addEventListener('click', () => {
-  setScale(calcScale(SCALE_STEP));
-});
-
-effectsList.addEventListener('change', (evt) => {
+function onRadioChangeHandler(evt) {
   if (evt.target.matches('[type=radio]')) {
     onEffectChangeHandler(evt.target);
-    destroySlider(sliderElement);
     if (currentEffect !== EFFECT_DEFAULT) {
       const {settings} = SliderEffectsOptions[currentEffect];
-      initSlider(settings);
+      prepareSlider(settings);
+    } else {
+      destroySlider();
     }
   }
-});
+}
+
+function initImageEditor() {
+  resetImageEditor();
+  smallerButton.addEventListener('click', () => {
+    setScale(calcScale(-SCALE_STEP));
+  });
+
+  biggerButton.addEventListener('click', () => {
+    setScale(calcScale(SCALE_STEP));
+  });
+
+  effectsList.addEventListener('change', onRadioChangeHandler);
+}
 
 export {initImageEditor};
