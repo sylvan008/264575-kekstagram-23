@@ -1,5 +1,6 @@
 import {isEscEvent} from './utils/utile.js';
 import {initFormValidation} from './upload-form-validate.js';
+import {initImageEditor} from './image-editor.js';
 
 const page = document.body;
 const uploadImageForm = document.querySelector('#upload-select-image');
@@ -31,6 +32,7 @@ function initUserModal() {
   uploadFileInput.addEventListener('change', openUserModal);
   closeButton.addEventListener('click', closeUserModal);
   initFormValidation();
+  initImageEditor();
 }
 
 export {initUserModal};
