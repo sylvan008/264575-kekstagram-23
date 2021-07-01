@@ -10,7 +10,7 @@ const effectValueElement = document.querySelector('.effect-level__value');
 const MAXIMUM_SCALE = 100;
 const MINIMUM_SCALE = 25;
 const SCALE_STEP = 25;
-const INITIAL_SCALE = 55;
+const INITIAL_SCALE = 100;
 const EFFECT_DEFAULT = 'none';
 
 const SliderDefaultOptions = {
@@ -114,11 +114,6 @@ function setScale(value) {
   updatePreviewImageStyles({transform: `transform: scale(${value / 100})`});
 }
 
-function resetImageEditor() {
-  currentEffect = EFFECT_DEFAULT;
-  setScale(INITIAL_SCALE);
-}
-
 function setPreviewFilter(filter, value, unit) {
   updatePreviewImageStyles({ filter: `filter: ${filter}(${value}${unit});` });
 }
@@ -143,9 +138,6 @@ function prepareSlider(options={}) {
 function destroySlider() {
   if (sliderElement.noUiSlider) {
     sliderElement.noUiSlider.destroy();
-    effectValueElement.value = '';
-    delete imagePreviewStyles['filter'];
-    updatePreviewImageStyles(imagePreviewStyles);
   }
 }
 
@@ -161,17 +153,24 @@ function onRadioChangeHandler(evt) {
   }
 }
 
-function initImageEditor() {
-  resetImageEditor();
-  smallerButton.addEventListener('click', () => {
-    setScale(calcScale(-SCALE_STEP));
-  });
-
-  biggerButton.addEventListener('click', () => {
-    setScale(calcScale(SCALE_STEP));
-  });
-
-  effectsList.addEventListener('change', onRadioChangeHandler);
+function resetImageEditor() {
+  imagePreview.classList.remove(`effects__preview--${currentEffect}`);
+  effectValueElement.value = '';
+  updatePreviewImageStyles({filter: 'unset'});
+  currentEffect = EFFECT_DEFAULT;
+  setScale(INITIAL_SCALE);
+  destroySlider();
 }
 
-export {initImageEditor};
+resetImageEditor();
+smallerButton.addEventListener('click', () => {
+  setScale(calcScale(-SCALE_STEP));
+});
+
+biggerButton.addEventListener('click', () => {
+  setScale(calcScale(SCALE_STEP));
+});
+
+effectsList.addEventListener('change', onRadioChangeHandler);
+
+export {resetImageEditor};
