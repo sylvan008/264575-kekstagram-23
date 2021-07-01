@@ -1,11 +1,12 @@
-const scale = document.querySelector('.scale');
+const uploadImageForm = document.querySelector('#upload-select-image');
+const scale = uploadImageForm.querySelector('.scale');
 const smallerButton = scale.querySelector('.scale__control--smaller');
 const biggerButton = scale.querySelector('.scale__control--bigger');
 const controlValueElement = scale.querySelector('.scale__control--value');
-const imagePreview = document.querySelector('.img-upload__preview img');
-const effectsList = document.querySelector('.effects__list');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectValueElement = document.querySelector('.effect-level__value');
+const imagePreview = uploadImageForm.querySelector('.img-upload__preview img');
+const effectsList = uploadImageForm.querySelector('.effects__list');
+const sliderElement = uploadImageForm.querySelector('.effect-level__slider');
+const effectValueElement = uploadImageForm.querySelector('.effect-level__value');
 
 const MAXIMUM_SCALE = 100;
 const MINIMUM_SCALE = 25;
@@ -155,7 +156,6 @@ function onRadioChangeHandler(evt) {
 
 function resetImageEditor() {
   imagePreview.classList.remove(`effects__preview--${currentEffect}`);
-  effectValueElement.value = '';
   updatePreviewImageStyles({filter: 'unset'});
   currentEffect = EFFECT_DEFAULT;
   setScale(INITIAL_SCALE);
