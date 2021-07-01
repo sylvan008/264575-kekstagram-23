@@ -12,4 +12,21 @@ function getData(onFail, onSuccess) {
     });
 }
 
-export {getData};
+function sendData(onFail, onSuccess, body) {
+  return fetch('https://23.javascript.pages.academy/kekstagram1', {
+    method: 'POST',
+    'Content-Type': 'multipart/form-data',
+    body,
+  })
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    }).catch(() => {
+      onFail();
+    });
+}
+
+export {getData, sendData};
