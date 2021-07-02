@@ -1,5 +1,3 @@
-import {noop} from './utils/utile.js';
-
 function createPictureThumbnail(template, {url, comments, likes}) {
   const pictureElement = template.querySelector('.picture__img');
   const pictureComment = template.querySelector('.picture__comments');
@@ -10,7 +8,7 @@ function createPictureThumbnail(template, {url, comments, likes}) {
   return template;
 }
 
-function viewImagesThumbnails(imagesData, clickImageHandler=noop) {
+function viewImagesThumbnails(clickImageHandler, imagesData) {
   const pictures = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture')
     .content

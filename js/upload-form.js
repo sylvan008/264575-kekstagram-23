@@ -1,3 +1,6 @@
+import {resetImageEditor} from './image-editor.js';
+import {sendData} from './api.js';
+
 const uploadImageForm = document.querySelector('#upload-select-image');
 const hashTagInput = uploadImageForm.querySelector('.text__hashtags');
 const commentElement = uploadImageForm.querySelector('.text__description');
@@ -42,16 +45,31 @@ function doValidationComment(value) {
   commentElement.reportValidity();
 }
 
-function initFormValidation() {
-  hashTagInput.addEventListener('input', (evt) => {
-    doValidationHashTag(evt.target.value);
-  });
-  hashTagInput.addEventListener('keydown', (evt) => evt.stopPropagation());
-
-  commentElement.addEventListener('input', (evt) => {
-    doValidationComment(evt.target.value);
-  });
-  commentElement.addEventListener('keydown', (evt) => evt.stopPropagation());
+function resetForm() {
+  uploadImageForm.reset();
+  resetImageEditor();
 }
 
-export {initFormValidation};
+function setImageUploadFormSubmit(onFail, onSuccess) {
+  uploadImageForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      onFail,
+      onSuccess,
+      new FormData(uploadImageForm),
+    );
+  });
+}
+
+hashTagInput.addEventListener('input', (evt) => {
+  doValidationHashTag(evt.target.value);
+});
+hashTagInput.addEventListener('keydown', (evt) => evt.stopPropagation());
+
+commentElement.addEventListener('input', (evt) => {
+  doValidationComment(evt.target.value);
+});
+commentElement.addEventListener('keydown', (evt) => evt.stopPropagation());
+
+export {resetForm, setImageUploadFormSubmit};

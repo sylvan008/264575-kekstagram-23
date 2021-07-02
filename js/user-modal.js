@@ -1,6 +1,6 @@
 import {isEscEvent} from './utils/utile.js';
-import {initFormValidation} from './upload-form-validate.js';
-import {initImageEditor} from './image-editor.js';
+import {resetForm, setImageUploadFormSubmit} from './upload-form.js';
+import {showMessage} from './utils/upload-message.js';
 
 const page = document.body;
 const uploadImageForm = document.querySelector('#upload-select-image');
@@ -16,7 +16,7 @@ const onPopupEscKeydown = (evt) => {
 };
 
 function closeUserModal() {
-  uploadFileInput.value = '';
+  resetForm();
   uploadImagePopup.classList.add('hidden');
   page.classList.remove('modal-open');
   page.removeEventListener('keydown', onPopupEscKeydown);
@@ -28,11 +28,16 @@ function openUserModal() {
   page.addEventListener('keydown', onPopupEscKeydown);
 }
 
-function initUserModal() {
-  uploadFileInput.addEventListener('change', openUserModal);
-  closeButton.addEventListener('click', closeUserModal);
-  initFormValidation();
-  initImageEditor();
-}
+uploadFileInput.addEventListener('change', openUserModal);
+closeButton.addEventListener('click', closeUserModal);
 
-export {initUserModal};
+setImageUploadFormSubmit(
+  () => {
+    closeUserModal();
+    showMessage('UPLOAD_FAIL');
+  },
+  () => {
+    closeUserModal();
+    showMessage('UPLOAD_SUCCESS');
+  },
+);
