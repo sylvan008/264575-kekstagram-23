@@ -44,10 +44,30 @@ function isEscEvent(evt) {
   return key === 'escape' || key === 'esc';
 }
 
+/**
+ * Создаёт функцию, которая получает n уникальных элементов из массива
+ * @param {number} count
+ * @return {function(*=): *[]}
+ */
+function createGetterRandomArrayElements(count) {
+  const obtainedElements = [];
+  return (elements=[]) => {
+    const countElements = getLastArrayIndex(elements);
+    while (obtainedElements.length < count) {
+      const element = elements[randomRange(0, countElements)];
+      if (!obtainedElements.includes(element)) {
+        obtainedElements.push(element);
+      }
+    }
+    return obtainedElements;
+  };
+}
+
 export {
   noop,
   checkStringLength,
   randomRange,
   getLastArrayIndex,
-  isEscEvent
+  isEscEvent,
+  createGetterRandomArrayElements
 };

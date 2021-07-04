@@ -1,3 +1,8 @@
+const pictures = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture')
+  .content
+  .querySelector('.picture');
+
 function createPictureThumbnail(template, {url, comments, likes}) {
   const pictureElement = template.querySelector('.picture__img');
   const pictureComment = template.querySelector('.picture__comments');
@@ -8,11 +13,13 @@ function createPictureThumbnail(template, {url, comments, likes}) {
   return template;
 }
 
+function removeThumbnails() {
+  pictures.querySelectorAll('.picture')
+    .forEach((thumbnail) => thumbnail.remove());
+}
+
 function viewImagesThumbnails(clickImageHandler, imagesData) {
-  const pictures = document.querySelector('.pictures');
-  const pictureTemplate = document.querySelector('#picture')
-    .content
-    .querySelector('.picture');
+  removeThumbnails();
   const fragment = document.createDocumentFragment();
   imagesData.forEach((photo) => {
     const newPictureMiniature = createPictureThumbnail(pictureTemplate.cloneNode(true), photo);

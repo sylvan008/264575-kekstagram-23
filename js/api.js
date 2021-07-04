@@ -13,7 +13,7 @@ function getData(onFail, onSuccess) {
 }
 
 function sendData(onFail, onSuccess, body) {
-  return fetch('https://23.javascript.pages.academy/kekstagram1', {
+  return fetch('https://23.javascript.pages.academy/kekstagram', {
     method: 'POST',
     'Content-Type': 'multipart/form-data',
     body,
