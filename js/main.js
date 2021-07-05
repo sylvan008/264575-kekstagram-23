@@ -5,6 +5,7 @@ import { viewErrorMessage } from './utils/error-message.js';
 import { createFilterChangeHandler } from './image-filter.js';
 import {debounce} from './utils/utile.js';
 import './user-modal.js';
+import './image-preview.js';
 
 const RENDER_DELAY = 500;
 
