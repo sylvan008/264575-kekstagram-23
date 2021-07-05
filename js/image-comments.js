@@ -29,6 +29,7 @@ function createComment(template, commentData) {
   const text = template.querySelector('.social__text');
   avatar.src = commentData.avatar;
   avatar.alt = commentData.name;
+  avatar.title = commentData.name;
   text.textContent = commentData.message;
   return template;
 }
