@@ -55,8 +55,11 @@ function onCommentsLoadEvent() {
   const nextViewComment = currentViewComment + COMMENT_LOAD_STEP;
   const addedComments = comments.slice(currentViewComment, nextViewComment);
   renderCommentsList(addedComments);
-  setCommentsCount(commentList.childElementCount, comments.length);
-  currentViewComment = nextViewComment;
+  currentViewComment = nextViewComment > comments.length ? comments.length : nextViewComment;
+  setCommentsCount(currentViewComment, comments.length);
+  if (currentViewComment >= comments.length) {
+    socialCommentsLoader.classList.add('hidden');
+  }
 }
 
 socialCommentsLoader.addEventListener('click',  onCommentsLoadEvent);
