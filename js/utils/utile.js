@@ -63,11 +63,21 @@ function createGetterRandomArrayElements(count) {
   };
 }
 
+function debounce(cb, timeoutDelay) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => cb.apply(null, rest), timeoutDelay);
+  };
+}
+
 export {
   noop,
   checkStringLength,
   randomRange,
   getLastArrayIndex,
   isEscEvent,
-  createGetterRandomArrayElements
+  createGetterRandomArrayElements,
+  debounce
 };
