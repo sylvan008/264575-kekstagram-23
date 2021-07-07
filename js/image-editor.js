@@ -142,6 +142,17 @@ function destroySlider() {
   }
 }
 
+
+function resetImageEditor(withScale=false) {
+  imagePreview.classList.remove(`effects__preview--${currentEffect}`);
+  updatePreviewImageStyles({filter: 'unset'});
+  currentEffect = EFFECT_DEFAULT;
+  destroySlider();
+  if (withScale) {
+    setScale(INITIAL_SCALE);
+  }
+}
+
 function onRadioChangeHandler(evt) {
   if (evt.target.matches('[type=radio]')) {
     onEffectChangeHandler(evt.target);
@@ -149,20 +160,11 @@ function onRadioChangeHandler(evt) {
       const {settings} = SliderEffectsOptions[currentEffect];
       prepareSlider(settings);
     } else {
-      destroySlider();
+      resetImageEditor();
     }
   }
 }
 
-function resetImageEditor() {
-  imagePreview.classList.remove(`effects__preview--${currentEffect}`);
-  updatePreviewImageStyles({filter: 'unset'});
-  currentEffect = EFFECT_DEFAULT;
-  setScale(INITIAL_SCALE);
-  destroySlider();
-}
-
-resetImageEditor();
 smallerButton.addEventListener('click', () => {
   setScale(calcScale(-SCALE_STEP));
 });

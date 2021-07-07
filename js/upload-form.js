@@ -47,7 +47,7 @@ function doValidationComment(value) {
 
 function resetForm() {
   uploadImageForm.reset();
-  resetImageEditor();
+  resetImageEditor(true);
 }
 
 function setImageUploadFormSubmit(onFail, onSuccess) {

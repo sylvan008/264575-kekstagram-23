@@ -29,6 +29,7 @@ function createComment(template, commentData) {
   const text = template.querySelector('.social__text');
   avatar.src = commentData.avatar;
   avatar.alt = commentData.name;
+  avatar.title = commentData.name;
   text.textContent = commentData.message;
   return template;
 }
@@ -54,8 +55,11 @@ function onCommentsLoadEvent() {
   const nextViewComment = currentViewComment + COMMENT_LOAD_STEP;
   const addedComments = comments.slice(currentViewComment, nextViewComment);
   renderCommentsList(addedComments);
-  setCommentsCount(commentList.childElementCount, comments.length);
-  currentViewComment = nextViewComment;
+  currentViewComment = nextViewComment > comments.length ? comments.length : nextViewComment;
+  setCommentsCount(currentViewComment, comments.length);
+  if (currentViewComment >= comments.length) {
+    socialCommentsLoader.classList.add('hidden');
+  }
 }
 
 socialCommentsLoader.addEventListener('click',  onCommentsLoadEvent);
