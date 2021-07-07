@@ -43,12 +43,24 @@ function renderCommentsList(viewComments) {
   commentList.append(fragment);
 }
 
+function hideCommentsLoader() {
+  socialCommentsLoader.classList.add('hidden');
+}
+
+function showCommentsLoader() {
+  socialCommentsLoader.classList.remove('hidden');
+}
+
 function setComments(commentsList) {
   clearComments();
   comments = commentsList.slice();
   const currentComments = comments.slice(0, currentViewComment);
   renderCommentsList(currentComments);
   setCommentsCount(commentList.childElementCount, comments.length);
+  showCommentsLoader();
+  if (comments.length <= COMMENT_LOAD_STEP) {
+    hideCommentsLoader();
+  }
 }
 
 function onCommentsLoadEvent() {
@@ -58,7 +70,7 @@ function onCommentsLoadEvent() {
   currentViewComment = nextViewComment > comments.length ? comments.length : nextViewComment;
   setCommentsCount(currentViewComment, comments.length);
   if (currentViewComment >= comments.length) {
-    socialCommentsLoader.classList.add('hidden');
+    hideCommentsLoader();
   }
 }
 
