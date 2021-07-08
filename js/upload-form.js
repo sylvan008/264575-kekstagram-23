@@ -6,7 +6,7 @@ const hashTagInput = uploadImageForm.querySelector('.text__hashtags');
 const commentElement = uploadImageForm.querySelector('.text__description');
 
 const COMMENT_MAX_LENGTH = 140;
-const hashTagRegular = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
+const HASH_TAG_REGULAR = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
 
 function checkDuplicateHashTags(hashTags) {
   const hashTagSet = new Set(hashTags);
@@ -14,7 +14,7 @@ function checkDuplicateHashTags(hashTags) {
 }
 
 function checkHashTagsByRegularExpression(hashTags) {
-  return hashTags.every((hashtag) => hashTagRegular.test(hashtag));
+  return hashTags.every((hashtag) => HASH_TAG_REGULAR.test(hashtag));
 }
 
 function doValidationHashTag(value) {
