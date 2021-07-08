@@ -1,12 +1,12 @@
 import {resetImageEditor} from './image-editor.js';
 import {sendData} from './api.js';
 
+const COMMENT_MAX_LENGTH = 140;
+const HASH_TAG_REGULAR = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
+
 const uploadImageForm = document.querySelector('#upload-select-image');
 const hashTagInput = uploadImageForm.querySelector('.text__hashtags');
 const commentElement = uploadImageForm.querySelector('.text__description');
-
-const COMMENT_MAX_LENGTH = 140;
-const HASH_TAG_REGULAR = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
 
 function checkDuplicateHashTags(hashTags) {
   const hashTagSet = new Set(hashTags);

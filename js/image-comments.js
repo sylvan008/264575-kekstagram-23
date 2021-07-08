@@ -1,11 +1,11 @@
+const COMMENT_LOAD_STEP = 5;
+
 const socialBlock = document.querySelector('.social');
 const commentList = socialBlock.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const socialCommentsLoader = socialBlock.querySelector('.social__comments-loader');
 const socialCommentCount = socialBlock.querySelector('.social__comment-count');
 const commentsCount = socialCommentCount.querySelector('.comments-count');
-
-const COMMENT_LOAD_STEP = 5;
 
 let comments = [];
 let currentViewComment = 5;
