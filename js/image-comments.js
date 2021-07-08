@@ -8,10 +8,10 @@ const socialCommentCount = socialBlock.querySelector('.social__comment-count');
 const commentsCount = socialCommentCount.querySelector('.comments-count');
 
 let comments = [];
-let currentViewComment = 5;
+let currentViewComment = COMMENT_LOAD_STEP;
 
 function clearComments() {
-  currentViewComment = 5;
+  currentViewComment = COMMENT_LOAD_STEP;
   comments = [];
   commentList
     .querySelectorAll('.social__comment')

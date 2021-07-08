@@ -1,3 +1,6 @@
+const ESCAPE_KEY = 'escape';
+const ESC_KEY = 'esc';
+
 /**
  * @desc Функция заглушка
  */
@@ -41,7 +44,7 @@ function getLastArrayIndex(array) {
  */
 function isEscEvent(evt) {
   const key = evt.key.toLowerCase();
-  return key === 'escape' || key === 'esc';
+  return key === ESCAPE_KEY || key === ESC_KEY;
 }
 
 /**
