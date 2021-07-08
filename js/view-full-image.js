@@ -1,4 +1,5 @@
 import {setComments} from './image-comments.js';
+import {createPopupEscHandler} from './utils/utile.js';
 
 const page = document.body;
 const bigPicture = document.querySelector('.big-picture');
@@ -10,9 +11,13 @@ const pictureCancel = bigPicture.querySelector('#picture-cancel');
 const MODAL_OPEN = 'modal-open';
 const HIDDEN = 'hidden';
 
+// eslint-disable-next-line no-use-before-define
+const onPopupEscKeydown = createPopupEscHandler(closeImageHandler);
+
 function closeImageHandler() {
   page.classList.remove(MODAL_OPEN);
   bigPicture.classList.add(HIDDEN);
+  page.removeEventListener('keydown', onPopupEscKeydown);
 }
 
 function viewFullImage(imageData) {
@@ -22,13 +27,11 @@ function viewFullImage(imageData) {
   likesCount.textContent = imageData.likes;
   description.textContent = imageData.description;
   setComments(imageData.comments);
+
+  page.addEventListener('keydown', onPopupEscKeydown);
 }
 
 pictureCancel.addEventListener('click', closeImageHandler);
-page.addEventListener('keydown', (evt) => {
-  if (evt.key.toLowerCase() === 'escape') {
-    closeImageHandler();
-  }
-});
+
 
 export {viewFullImage};

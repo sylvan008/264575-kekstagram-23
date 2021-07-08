@@ -75,6 +75,14 @@ function debounce(cb, timeoutDelay) {
   };
 }
 
+function createPopupEscHandler(cb) {
+  return (evt) => {
+    if (isEscEvent(evt)) {
+      cb();
+    }
+  };
+}
+
 export {
   noop,
   checkStringLength,
@@ -82,5 +90,6 @@ export {
   getLastArrayIndex,
   isEscEvent,
   createGetterRandomArrayElements,
-  debounce
+  debounce,
+  createPopupEscHandler
 };

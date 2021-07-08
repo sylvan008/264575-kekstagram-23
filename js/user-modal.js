@@ -1,4 +1,4 @@
-import {isEscEvent} from './utils/utile.js';
+import {createPopupEscHandler} from './utils/utile.js';
 import {resetForm, setImageUploadFormSubmit} from './upload-form.js';
 import {showMessage} from './utils/upload-message.js';
 
@@ -8,12 +8,8 @@ const uploadFileInput = uploadImageForm.querySelector('#upload-file');
 const uploadImagePopup = uploadImageForm.querySelector('.img-upload__overlay');
 const closeButton = uploadImageForm.querySelector('#upload-cancel');
 
-const onPopupEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
-    // eslint-disable-next-line no-use-before-define
-    closeUserModal();
-  }
-};
+// eslint-disable-next-line no-use-before-define
+const onPopupEscKeydown = createPopupEscHandler(closeUserModal);
 
 function closeUserModal() {
   resetForm();
